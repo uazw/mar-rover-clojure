@@ -6,7 +6,7 @@
   (testing "should locate at 0 0, and face towards north"
     (is (= "I'm at 0 0, and towards N"
           (-> 
-           (run "" "00N" "")
+           (run "55" "00N" "")
            (mar-rover-to-str))))))
 
           
@@ -15,7 +15,7 @@
     (is 
       (= "I'm at 0 1, and towards N"
         (-> 
-         (run "" "00N" "M")
+         (run "55" "00N" "M")
          (mar-rover-to-str))))))
           
           
@@ -24,7 +24,7 @@
     (is 
       (= "I'm at 2 2, and towards E"
         (-> 
-         (run "" "22N" "R")
+         (run "55" "22N" "R")
          (mar-rover-to-str))))))
           
 (deftest should-return-22W-given-22E-when-receive-MLLM-directive
@@ -32,7 +32,7 @@
     (is
       (= "I'm at 2 2, and towards W"
         (->
-         (run "" "22E" "MLLM") 
+         (run "55" "22E" "MLLM") 
          (mar-rover-to-str))))))
          
 (deftest should-return-05N-given-05N-when-receive-MLM-directive
@@ -40,7 +40,7 @@
     (is 
       (= "I'm at 0 5, and towards W"
         (->
-         (run "" "05N" "MLM")
+         (run "55" "05N" "MLM")
          (mar-rover-to-str))))))
          
 (deftest should-return-50S-given-50E-when-receive-MRM-directive
@@ -48,7 +48,7 @@
     (is 
       (= "I'm at 5 0, and towards S"
         (->
-         (run "" "50E" "MRM")
+         (run "55" "50E" "MRM")
          (mar-rover-to-str))))))
          
 (deftest should-return-13N-given-12N-when-receive-LMLMLMLMM-directive
@@ -56,7 +56,7 @@
     (is 
       (= "I'm at 1 3, and towards N"
         (->
-         (run "" "12N" "LMLMLMLMM")
+         (run "55" "12N" "LMLMLMLMM")
          (mar-rover-to-str))))))
          
 (deftest should-return-13N-given-12N-when-receive-LMLMLMLMM-directive
@@ -64,7 +64,7 @@
     (is 
       (= "I'm at 1 3, and towards N"
         (->
-         (run "" "12N" "LMLMLMLMM")
+         (run "55" "12N" "LMLMLMLMM")
          (mar-rover-to-str))))))
          
 (deftest should-return-51E-given-33E-when-receive-MMRMMRMRRM-directive
@@ -72,6 +72,5 @@
     (is 
       (= "I'm at 5 1, and towards E"
         (->
-         (run "" "51E" "LMLMLMLMM")
+         (run "55" "51E" "LMLMLMLMM")
          (mar-rover-to-str))))))
-         
