@@ -42,15 +42,6 @@
       :E :N}]
     (execute-turn-around-directive mar-rover left)))
 
-(defn- execute-single-directive [mar-rover directive]
-  (case directive
-    \M (execute-move-directive mar-rover)
-    \R (execute-right-directive mar-rover)
-    \L (execute-left-directive mar-rover)))
-
-(defn receive [mar-rover directives]
-  (reduce execute-single-directive mar-rover directives))
- 
 (defn mar-rover-to-str [mar-rover]
   (let [{:keys [x y towards]} mar-rover]
        (format "I'm at %d %d, and towards %s" x y (name towards))))
