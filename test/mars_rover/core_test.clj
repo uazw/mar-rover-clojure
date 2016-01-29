@@ -6,16 +6,16 @@
   (testing "should locate at 0 0, and face towards north"
     (is (= "I'm at 0 0, and towards N"
           (-> 
-           (locate-on "00N")
+           (run "" "00N" "")
            (mar-rover-to-str))))))
+
           
 (deftest should-return-01N-given-00N-when-receive-m-directive
   (testing "should move towards"
     (is 
       (= "I'm at 0 1, and towards N"
         (-> 
-         (locate-on "00N")
-         (receive "M")
+         (run "" "00N" "M")
          (mar-rover-to-str))))))
           
           
@@ -24,8 +24,7 @@
     (is 
       (= "I'm at 2 2, and towards E"
         (-> 
-         (locate-on "22N")
-         (receive "R")
+         (run "" "22N" "R")
          (mar-rover-to-str))))))
           
 (deftest should-return-22W-given-22E-when-receive-MLLM-directive
@@ -81,3 +80,4 @@
          (locate-on "51E")
          (receive "LMLMLMLMM")
          (mar-rover-to-str))))))
+         
