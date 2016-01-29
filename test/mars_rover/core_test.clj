@@ -31,9 +31,8 @@
   (testing "should receive muti-directive"
     (is
       (= "I'm at 2 2, and towards W"
-        (-> 
-         (locate-on "22E")
-         (receive "MLLM")
+        (->
+         (run "" "22E" "MLLM") 
          (mar-rover-to-str))))))
          
 (deftest should-return-05N-given-05N-when-receive-MLM-directive
@@ -41,8 +40,7 @@
     (is 
       (= "I'm at 0 5, and towards W"
         (->
-         (locate-on "05N")
-         (receive "MLM")
+         (run "" "05N" "MLM")
          (mar-rover-to-str))))))
          
 (deftest should-return-50S-given-50E-when-receive-MRM-directive
@@ -50,8 +48,7 @@
     (is 
       (= "I'm at 5 0, and towards S"
         (->
-         (locate-on "50E")
-         (receive "MRM")
+         (run "" "50E" "MRM")
          (mar-rover-to-str))))))
          
 (deftest should-return-13N-given-12N-when-receive-LMLMLMLMM-directive
@@ -59,8 +56,7 @@
     (is 
       (= "I'm at 1 3, and towards N"
         (->
-         (locate-on "12N")
-         (receive "LMLMLMLMM")
+         (run "" "12N" "LMLMLMLMM")
          (mar-rover-to-str))))))
          
 (deftest should-return-13N-given-12N-when-receive-LMLMLMLMM-directive
@@ -68,8 +64,7 @@
     (is 
       (= "I'm at 1 3, and towards N"
         (->
-         (locate-on "12N")
-         (receive "LMLMLMLMM")
+         (run "" "12N" "LMLMLMLMM")
          (mar-rover-to-str))))))
          
 (deftest should-return-51E-given-33E-when-receive-MMRMMRMRRM-directive
@@ -77,7 +72,6 @@
     (is 
       (= "I'm at 5 1, and towards E"
         (->
-         (locate-on "51E")
-         (receive "LMLMLMLMM")
+         (run "" "51E" "LMLMLMLMM")
          (mar-rover-to-str))))))
          
