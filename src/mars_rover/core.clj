@@ -6,21 +6,24 @@
        [x y d &_] locate-info-list]
    {:x (Integer/parseInt x) :y (Integer/parseInt y) :towards (keyword d)}))
 
-(defn- move-within-bound [current incrment]
-  (let [result (+ current incrment)]
-    (cond
-      (> 0 result) 0
-      (< 5 result) 5
-      :else result)))
+(defn- walk-in-bound-helper [bound current]
+  (cond
+    (> 0 current) 0
+    (< bound current) bound
+    :else current))
     
-(defn- execute-move-directive 
- [mar-rover]
+(defn- walk-in-bound [bound-info mar-rover]
+  {:x (walk-in-bound-helper (:x bound-info) (:x mar-rover))
+   :y (walk-in-bound-helper (:y bound-info) (:y mar-rover))})
+
+(defn- execute-move-directive [bound-info mar-rover]
  (let [moves {
      :N {:y 1} 
      :S {:y -1} 
      :W {:x -1} 
-     :E {:x 1}}]
-   (merge-with move-within-bound ((:towards mar-rover) moves) mar-rover)))
+     :E {:x 1}}
+     move-without-bound (merge-with + ((:towards mar-rover) moves) mar-rover)]
+      (merge mar-rover (walk-in-bound bound-info move-without-bound))))
     
 (defn- execute-turn-around-directive [mar-rover way-to-turn]
   (let [{:keys [towards]} mar-rover]
@@ -46,13 +49,16 @@
   (let [{:keys [x y towards]} mar-rover]
        (format "I'm at %d %d, and towards %s" x y (name towards))))
 
-
+(defn- bound-info [mar-info]
+  (let [mar-info-list (map str mar-info)
+       [x y &_] mar-info-list]
+    {:x (Integer/parseInt x) :y (Integer/parseInt y)}))
      
 (defn run [mar-info location directives]
-  (let [bound mar-info 
+  (let [bound (bound-info mar-info)
         mar-rover (locate-on location)
         dir-func {
             \R execute-right-directive 
             \L execute-left-directive
-            \M execute-move-directive}]            
+            \M (partial execute-move-directive bound)}]            
     (reduce (fn [m d] ((dir-func d) m)) mar-rover directives)))

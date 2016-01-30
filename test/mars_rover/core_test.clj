@@ -74,3 +74,11 @@
         (->
          (run "55" "51E" "LMLMLMLMM")
          (mar-rover-to-str))))))
+
+(deftest should-return-64N-given-54E-and-mar-64-when-receive-MLM-directive
+  (testing "should receive muti-directive"
+    (is
+      (= "I'm at 6 4, and towards N"
+        (->
+          (run "64" "54E" "MLM")
+          (mar-rover-to-str))))))

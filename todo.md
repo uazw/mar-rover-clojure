@@ -18,5 +18,5 @@
 * mar-rover can not get out of mar(4X6) MLM by up bound
 05N -> 06W
 
-* mar-rover can not get out of mar(6X4) MRM by right bound
-54E -> 64N
+* mar-rover can not get out of mar(6X4) MLM by right bound
+54E -> 64S
